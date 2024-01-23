@@ -1,12 +1,12 @@
 import random
 
-def random_sayi_olusturma():
+def random_nbr_generate():
     while True:
-        dört_basamakli_sayi = random.randint(1000, 9999)
-        if(len(set(str(dört_basamakli_sayi)))) == 4:
-            return dört_basamakli_sayi
+        four_digit_nbr = random.randint(1000, 9999)
+        if(len(set(str(four_digit_nbr)))) == 4:
+            return four_digit_nbr
 
-def sayi_tahmin_oyunu(number1, number2):
+def nbr_guess_game(number1, number2):
     res_one = 0
     res_two = 0
     digit = 0
@@ -20,16 +20,23 @@ def sayi_tahmin_oyunu(number1, number2):
         digit += 1
     return res_one, res_two
 
-random_sayi = random_sayi_olusturma()
+random_nbr = random_nbr_generate()
+counter = 0
+print("sayiyi gormek icin pas yazabilirsiniz : ")
 while True:
-    girilen_sayi = int(input("4 basamakli bir sayi giriniz... : "))
-    if(len(set(str(girilen_sayi)))) < 4:
+    user_input = input("4 basamakli bir sayi giriniz... : ")
+    if ("pas" in user_input):
+        print(random_nbr)
+        break
+    input_nbr = int(user_input)
+    if(len(set(str(input_nbr)))) < 4:
         print("girilen sayinin rakamlari birbirinden farkli olmalidir!")
-    elif (not(1000 <= girilen_sayi < 10000)):
+    elif (not(1000 <= input_nbr < 10000)):
         print("girilen sayi dört basamakli olmalidir!")
     else:
-        if (random_sayi == girilen_sayi):
-            print("Tebrikler, sayiyi doğru tahmin ettiniz...")
+        if (random_nbr == input_nbr):
+            print("Tebrikler, sayiyi", counter, "adimla doğru tahmin ettiniz...")
             break
         else:
-            print(sayi_tahmin_oyunu(random_sayi, girilen_sayi))
+            print(nbr_guess_game(random_nbr, input_nbr))
+            counter += 1
